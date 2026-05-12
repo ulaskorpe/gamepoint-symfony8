@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Oyunlar — {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <label for="categoryFilter" class="form-label fw-semibold mb-2">Kategori</label>
+                    <select id="categoryFilter" class="form-select form-select-lg" aria-label="Kategoriye göre filtrele">
+                        <option value="" {{ currentCategoryId is null ? 'selected' : '' }}>Tümü</option>
+                        {% for c in categories %}
+                            <option value="{{ c.id }}" {{ currentCategoryId == c.id ? 'selected' : '' }}>{{ c.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h2 class="h5 mb-0">Oyunlar{% if currentCategoryId %} <span class="text-muted fw-normal">(filtreli)</span>{% endif %}</h2>
+                </div>
+                <div class="card-body">
+                    {% if games is empty %}
+                        <p class="text-muted mb-0">Bu kriterlere uygun oyun bulunamadı.</p>
+                    {% else %}
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+                            {% for game in games %}
+                                <div class="col">
+                                    <div class="card h-100 border shadow-sm">
+                                        {% set img = game.image %}
+                                        {% if img %}
+                                            {% if img starts with 'http://' or img starts with 'https://' %}
+                                                <img src="{{ img }}" class="card-img-top object-fit-cover" alt="" style="height: 160px;">
+                                            {% else %}
+                                                <img src="{{ asset(img) }}" class="card-img-top object-fit-cover" alt="" style="height: 160px;">
+                                            {% endif %}
+                                        {% else %}
+                                            <div class="bg-secondary-subtle d-flex align-items-center justify-content-center text-secondary small" style="height: 160px;">Görsel yok</div>
+                                        {% endif %}
+                                        <div class="card-body">
+                                            <h3 class="card-title h6 mb-0">{{ game.title }}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        {% if totalPages > 1 %}
+                            <nav class="mt-4 d-flex flex-wrap justify-content-between align-items-center gap-2" aria-label="Sayfalama">
+                                {% if page > 1 %}
+                                    <a class="btn btn-outline-primary" href="{{ path('app_home', queryParams|merge({page: page - 1})) }}">Önceki</a>
+                                {% else %}
+                                    <span class="btn btn-outline-secondary disabled">Önceki</span>
+                                {% endif %}
+                                <span class="text-muted small">Sayfa {{ page }} / {{ totalPages }} ({{ total }} kayıt)</span>
+                                {% if page < totalPages %}
+                                    <a class="btn btn-outline-primary" href="{{ path('app_home', queryParams|merge({page: page + 1})) }}">Sonraki</a>
+                                {% else %}
+                                    <span class="btn btn-outline-secondary disabled">Sonraki</span>
+                                {% endif %}
+                            </nav>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+(function () {
+    var sel = document.getElementById('categoryFilter');
+    if (!sel) return;
+    sel.addEventListener('change', function () {
+        var u = new URL(window.location.origin + '{{ path('app_home') }}');
+        if (this.value) u.searchParams.set('category', this.value);
+        else u.searchParams.delete('category');
+        u.searchParams.set('page', '1');
+        window.location.href = u.pathname + u.search;
+    });
+})();
+</script>
+{% endblock %}
