@@ -1,18 +1,19 @@
 {% extends 'base.html.twig' %}
+{% trans_default_domain 'project' %}
 
-{% block title %}Kayıt — {{ parent() }}{% endblock %}
+{% block title %}{{ 'auth.register.page_title'|trans }} — {{ parent() }}{% endblock %}
 
 {% block body %}
 <div class="min-vh-100 d-flex align-items-center justify-content-center p-4">
     <div class="card shadow-sm" style="max-width: 420px; width: 100%;">
         <div class="card-body p-4">
-            <h1 class="h4 text-center mb-4">Kayıt ol</h1>
+            <h1 class="h4 text-center mb-4">{{ 'auth.register.heading'|trans }}</h1>
 
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
                     <div class="alert alert-{{ label == 'error' ? 'danger' : label }} alert-dismissible fade show" role="alert">
                         {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'auth.login.alert_close'|trans }}"></button>
                     </div>
                 {% endfor %}
             {% endfor %}
@@ -20,25 +21,25 @@
             <form method="post" action="{{ path('app_register') }}">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('user_register') }}">
                 <div class="mb-3">
-                    <label for="reg-username" class="form-label">Kullanıcı adı</label>
+                    <label for="reg-username" class="form-label">{{ 'auth.register.username'|trans }}</label>
                     <input type="text" class="form-control" id="reg-username" name="username" autocomplete="username" required>
                 </div>
                 <div class="mb-3">
-                    <label for="reg-email" class="form-label">E-posta</label>
+                    <label for="reg-email" class="form-label">{{ 'auth.register.email'|trans }}</label>
                     <input type="email" class="form-control" id="reg-email" name="email" autocomplete="email" required>
                 </div>
                 <div class="mb-3">
-                    <label for="reg-password" class="form-label">Şifre</label>
+                    <label for="reg-password" class="form-label">{{ 'auth.register.password'|trans }}</label>
                     <input type="password" class="form-control" id="reg-password" name="password" autocomplete="new-password" required>
                 </div>
                 <div class="mb-3">
-                    <label for="reg-password2" class="form-label">Şifre (tekrar)</label>
+                    <label for="reg-password2" class="form-label">{{ 'auth.register.password_repeat'|trans }}</label>
                     <input type="password" class="form-control" id="reg-password2" name="password_confirm" autocomplete="new-password" required>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Hesap oluştur</button>
+                <button type="submit" class="btn btn-primary w-100">{{ 'auth.register.submit'|trans }}</button>
             </form>
             <p class="text-center text-muted small mt-3 mb-0">
-                Zaten hesabın var mı? <a href="{{ path('app_login') }}">Giriş yap</a>
+                {{ 'auth.register.prompt_has_account'|trans }} <a href="{{ path('app_login') }}">{{ 'auth.login.submit'|trans }}</a>
             </p>
         </div>
     </div>

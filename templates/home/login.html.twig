@@ -1,22 +1,23 @@
 {% extends 'base.html.twig' %}
+{% trans_default_domain 'project' %}
 
-{% block title %}Giriş — {{ parent() }}{% endblock %}
+{% block title %}{{ 'auth.login.page_title'|trans }} — {{ parent() }}{% endblock %}
 
 {% block body %}
 <div class="min-vh-100 d-flex align-items-center justify-content-center p-4">
     <div class="card shadow-sm" style="max-width: 420px; width: 100%;">
         <div class="card-body p-4">
-            <h1 class="h4 text-center mb-4">Giriş</h1>
+            <h1 class="h4 text-center mb-4">{{ 'auth.login.heading'|trans }}</h1>
 
             {% if error %}
-                <div class="alert alert-danger" role="alert">Kullanıcı adı veya şifre hatalı.</div>
+                <div class="alert alert-danger" role="alert">{{ 'auth.login.error_invalid'|trans }}</div>
             {% endif %}
 
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
                     <div class="alert alert-{{ label == 'error' ? 'danger' : label }} alert-dismissible fade show" role="alert">
                         {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'auth.login.alert_close'|trans }}"></button>
                     </div>
                 {% endfor %}
             {% endfor %}
@@ -24,21 +25,21 @@
             <form method="post" action="{{ path('app_login') }}">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <div class="mb-3">
-                    <label for="username" class="form-label">Kullanıcı adı</label>
+                    <label for="username" class="form-label">{{ 'auth.login.username'|trans }}</label>
                     <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" autocomplete="username" required>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Şifre</label>
+                    <label for="password" class="form-label">{{ 'auth.login.password'|trans }}</label>
                     <input type="password" class="form-control" id="password" name="_password" autocomplete="current-password" required>
                 </div>
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="remember_me" name="_remember_me">
-                    <label class="form-check-label" for="remember_me">Beni hatırla</label>
+                    <label class="form-check-label" for="remember_me">{{ 'auth.login.remember_me'|trans }}</label>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Giriş yap</button>
+                <button type="submit" class="btn btn-primary w-100">{{ 'auth.login.submit'|trans }}</button>
             </form>
             <p class="text-center text-muted small mt-3 mb-0">
-                Hesabın yok mu? <a href="{{ path('app_register') }}">Kayıt ol</a>
+                {{ 'auth.login.prompt_no_account'|trans }} <a href="{{ path('app_register') }}">{{ 'nav.register'|trans }}</a>
             </p>
         </div>
     </div>

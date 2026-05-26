@@ -1,0 +1,4 @@
+tech.validation.title_not_blank: Please enter a title.
+tech.validation.title_max: The title must not exceed {{ limit }} characters.
+tech.validation.description_max: The description must not exceed {{ limit }} characters.
+tech.validation.code_max: The code must not exceed {{ limit }} characters.

@@ -1,0 +1,99 @@
+nav:
+    brand: GamePoint
+    games: Oyunlar
+    technical: Teknik
+    language: Dil
+    technical_records: Teknik kayıtlar
+    locale_tr: Türkçe
+    locale_en: English
+    auth_aria_label: Kimlik doğrulama
+    logout: Çıkış
+    login: Giriş
+    register: Kayıt ol
+app:
+    default_title: GamePoint
+home:
+    page_title: Oyunlar
+    category_label: Kategori
+    category_filter_aria: Kategoriye göre filtrele
+    category_all: Tümü
+    games_heading: Oyunlar
+    games_filtered: (filtreli)
+    games_empty: Bu kriterlere uygun oyun bulunamadı.
+    image_none: Görsel yok
+    pagination_aria: Sayfalama
+    pagination_previous: Önceki
+    pagination_next: Sonraki
+    pagination_status: 'Sayfa %page% / %totalPages% (%total% kayıt)'
+    load_time: 'Yükleme süresi: %ms% ms'
+    load_time_cached: 'Yükleme süresi: %ms% ms (Redis önbellek)'
+tech:
+    empty_list: Henüz teknik kayıt yok.
+    col_title: Başlık
+    col_description: Açıklama
+    col_created: Oluşturulma
+    col_actions: İşlemler
+    btn_create: Kayıt ekle
+    btn_edit: Düzenle
+    btn_delete: Sil
+    delete_swal_title: Bu kayıt silinsin mi?
+    delete_swal_text: Bu işlem geri alınamaz.
+    delete_swal_confirm: Evet, sil
+    delete_swal_cancel: Vazgeç
+    create:
+        page_title: Yeni teknik kayıt
+        heading: Yeni teknik kayıt
+        back_to_list: Listeye dön
+    edit:
+        page_title: Teknik kayıt düzenle
+        heading: Teknik kayıt düzenle
+    form:
+        title: Başlık
+        description: Açıklama
+        code: Kod
+        submit: Kaydet
+        update: Güncelle
+        cancel: Vazgeç
+    flash:
+        created: Teknik kayıt kaydedildi.
+        updated: Teknik kayıt güncellendi.
+        deleted: Teknik kayıt silindi.
+        delete_csrf: Güvenlik doğrulaması başarısız. Lütfen tekrar deneyin.
+auth:
+    login:
+        page_title: Giriş
+        heading: Giriş
+        error_invalid: Kullanıcı adı veya şifre hatalı.
+        alert_close: Kapat
+        username: Kullanıcı adı
+        password: Şifre
+        remember_me: Beni hatırla
+        submit: Giriş yap
+        prompt_no_account: Hesabın yok mu?
+    register:
+        page_title: Kayıt
+        heading: Kayıt ol
+        username: Kullanıcı adı
+        email: E-posta
+        password: Şifre
+        password_repeat: Şifre (tekrar)
+        submit: Hesap oluştur
+        prompt_has_account: Zaten hesabın var mı?
+api:
+    page_title: API
+    heading: API
+    intro: Bu sayfa API denetleyicisi için örnek içeriktir.
+elastic:
+    page_title: Elasticsearch
+    heading: Oyun arama (Elasticsearch)
+    cluster_version: 'ES %version%'
+    search_label: Arama
+    search_placeholder: Oyun adı veya açıklama...
+    search_submit: Ara
+    reindex_btn: Oyunları indeksle
+    test_api: Bağlantı testi (JSON)
+    reindex_done: '%count% oyun Elasticsearch''e aktarıldı.'
+    results_heading: '"%query%" için %count% sonuç'
+    results_empty: Sonuç bulunamadı. Önce "Oyunları indeksle" butonuna tıklayın.
+    score: 'Skor %score%'
+    intro: Arama yapmak için bir kelime girin. İlk kullanımda oyunları indekslemeniz gerekir.

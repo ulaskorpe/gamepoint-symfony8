@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'project' %}
+
+{% block title %}{{ 'tech.create.page_title'|trans }} — {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    <div class="card shadow-sm border-0 mx-auto" style="max-width: 720px;">
+        <div class="card-header bg-white border-bottom py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <h1 class="h5 mb-0">{{ 'tech.create.heading'|trans }}</h1>
+            <a class="btn btn-outline-secondary btn-sm" href="{{ path('app_tech') }}">{{ 'tech.create.back_to_list'|trans }}</a>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            {{ form_row(form.title) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.code) }}
+            <div class="d-flex flex-wrap gap-2 align-items-center mt-3">
+                {{ form_widget(form.submit) }}
+                <a class="btn btn-outline-secondary" href="{{ path('app_tech') }}">{{ 'tech.form.cancel'|trans }}</a>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

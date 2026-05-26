@@ -1,16 +1,24 @@
 {% extends 'base.html.twig' %}
+{% trans_default_domain 'project' %}
 
-{% block title %}Oyunlar — {{ parent() }}{% endblock %}
+{% block title %}{{ 'home.page_title'|trans }} — {{ parent() }}{% endblock %}
 
 {% block body %}
 <div class="container py-4">
+    <p class="text-muted small text-end mb-2">
+        {% if cacheEnabled and cacheHit %}
+            {{ 'home.load_time_cached'|trans({ '%ms%': loadTimeMs }) }}
+        {% else %}
+            {{ 'home.load_time'|trans({ '%ms%': loadTimeMs }) }}
+        {% endif %}
+    </p>
     <div class="row g-4">
         <div class="col-12">
             <div class="card shadow-sm border-0">
                 <div class="card-body">
-                    <label for="categoryFilter" class="form-label fw-semibold mb-2">Kategori</label>
-                    <select id="categoryFilter" class="form-select form-select-lg" aria-label="Kategoriye göre filtrele">
-                        <option value="" {{ currentCategoryId is null ? 'selected' : '' }}>Tümü</option>
+                    <label for="categoryFilter" class="form-label fw-semibold mb-2">{{ 'home.category_label'|trans }}</label>
+                    <select id="categoryFilter" class="form-select form-select-lg" aria-label="{{ 'home.category_filter_aria'|trans }}">
+                        <option value="" {{ currentCategoryId is null ? 'selected' : '' }}>{{ 'home.category_all'|trans }}</option>
                         {% for c in categories %}
                             <option value="{{ c.id }}" {{ currentCategoryId == c.id ? 'selected' : '' }}>{{ c.title }}</option>
                         {% endfor %}
@@ -22,11 +30,11 @@
         <div class="col-12">
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-white border-bottom py-3">
-                    <h2 class="h5 mb-0">Oyunlar{% if currentCategoryId %} <span class="text-muted fw-normal">(filtreli)</span>{% endif %}</h2>
+                    <h2 class="h5 mb-0">{{ 'home.games_heading'|trans }}{% if currentCategoryId %} <span class="text-muted fw-normal">{{ 'home.games_filtered'|trans }}</span>{% endif %}</h2>
                 </div>
                 <div class="card-body">
                     {% if games is empty %}
-                        <p class="text-muted mb-0">Bu kriterlere uygun oyun bulunamadı.</p>
+                        <p class="text-muted mb-0">{{ 'home.games_empty'|trans }}</p>
                     {% else %}
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
                             {% for game in games %}
@@ -40,7 +48,7 @@
                                                 <img src="{{ asset(img) }}" class="card-img-top object-fit-cover" alt="" style="height: 160px;">
                                             {% endif %}
                                         {% else %}
-                                            <div class="bg-secondary-subtle d-flex align-items-center justify-content-center text-secondary small" style="height: 160px;">Görsel yok</div>
+                                            <div class="bg-secondary-subtle d-flex align-items-center justify-content-center text-secondary small" style="height: 160px;">{{ 'home.image_none'|trans }}</div>
                                         {% endif %}
                                         <div class="card-body">
                                             <h3 class="card-title h6 mb-0">{{ game.title }}</h3>
@@ -51,17 +59,17 @@
                         </div>
 
                         {% if totalPages > 1 %}
-                            <nav class="mt-4 d-flex flex-wrap justify-content-between align-items-center gap-2" aria-label="Sayfalama">
+                            <nav class="mt-4 d-flex flex-wrap justify-content-between align-items-center gap-2" aria-label="{{ 'home.pagination_aria'|trans }}">
                                 {% if page > 1 %}
-                                    <a class="btn btn-outline-primary" href="{{ path('app_home', queryParams|merge({page: page - 1})) }}">Önceki</a>
+                                    <a class="btn btn-outline-primary" href="{{ path('app_home', queryParams|merge({page: page - 1})) }}">{{ 'home.pagination_previous'|trans }}</a>
                                 {% else %}
-                                    <span class="btn btn-outline-secondary disabled">Önceki</span>
+                                    <span class="btn btn-outline-secondary disabled">{{ 'home.pagination_previous'|trans }}</span>
                                 {% endif %}
-                                <span class="text-muted small">Sayfa {{ page }} / {{ totalPages }} ({{ total }} kayıt)</span>
+                                <span class="text-muted small">{{ 'home.pagination_status'|trans({ '%page%': page, '%totalPages%': totalPages, '%total%': total }) }}</span>
                                 {% if page < totalPages %}
-                                    <a class="btn btn-outline-primary" href="{{ path('app_home', queryParams|merge({page: page + 1})) }}">Sonraki</a>
+                                    <a class="btn btn-outline-primary" href="{{ path('app_home', queryParams|merge({page: page + 1})) }}">{{ 'home.pagination_next'|trans }}</a>
                                 {% else %}
-                                    <span class="btn btn-outline-secondary disabled">Sonraki</span>
+                                    <span class="btn btn-outline-secondary disabled">{{ 'home.pagination_next'|trans }}</span>
                                 {% endif %}
                             </nav>
                         {% endif %}

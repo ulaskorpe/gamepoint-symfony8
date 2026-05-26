@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'project' %}
+
+{% block title %}{{ 'elastic.page_title'|trans }} — {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white border-bottom py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
+                    <h1 class="h5 mb-0">{{ 'elastic.heading'|trans }}</h1>
+                    {% if clusterVersion %}
+                        <span class="badge text-bg-success">{{ 'elastic.cluster_version'|trans({ '%version%': clusterVersion }) }}</span>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    {% if error %}
+                        <div class="alert alert-danger" role="alert">{{ error }}</div>
+                    {% endif %}
+
+                    {% if indexedCount is not null %}
+                        <div class="alert alert-info" role="alert">{{ 'elastic.reindex_done'|trans({ '%count%': indexedCount }) }}</div>
+                    {% endif %}
+
+                    <form method="get" action="{{ path('app_elastic_search') }}" class="row g-3 mb-4">
+                        <div class="col-md-9">
+                            <label for="searchQuery" class="form-label">{{ 'elastic.search_label'|trans }}</label>
+                            <input type="search" id="searchQuery" name="q" class="form-control form-control-lg" value="{{ query }}" placeholder="{{ 'elastic.search_placeholder'|trans }}">
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg w-100">{{ 'elastic.search_submit'|trans }}</button>
+                        </div>
+                    </form>
+
+                    <div class="mb-4">
+                        <a class="btn btn-outline-secondary btn-sm" href="{{ path('app_elastic_search', { reindex: 1, q: query }) }}">{{ 'elastic.reindex_btn'|trans }}</a>
+                        <a class="btn btn-outline-secondary btn-sm" href="{{ path('app_elasticsearch_test') }}" target="_blank" rel="noopener">{{ 'elastic.test_api'|trans }}</a>
+                    </div>
+
+                    {% if query %}
+                        <h2 class="h6 text-muted mb-3">{{ 'elastic.results_heading'|trans({ '%count%': results|length, '%query%': query }) }}</h2>
+                        {% if results is empty %}
+                            <p class="text-muted mb-0">{{ 'elastic.results_empty'|trans }}</p>
+                        {% else %}
+                            <div class="list-group">
+                                {% for item in results %}
+                                    <div class="list-group-item">
+                                        <div class="d-flex justify-content-between align-items-start gap-2">
+                                            <div>
+                                                <h3 class="h6 mb-1">{{ item.title }}</h3>
+                                                {% if item.category_title %}
+                                                    <span class="badge text-bg-light border">{{ item.category_title }}</span>
+                                                {% endif %}
+                                                {% if item.description %}
+                                                    <p class="small text-muted mb-0 mt-2">{{ item.description|length > 160 ? item.description|slice(0, 160) ~ '…' : item.description }}</p>
+                                                {% endif %}
+                                            </div>
+                                            {% if item.score is not null %}
+                                                <span class="badge text-bg-primary">{{ 'elastic.score'|trans({ '%score%': item.score|number_format(2) }) }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <p class="text-muted mb-0">{{ 'elastic.intro'|trans }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

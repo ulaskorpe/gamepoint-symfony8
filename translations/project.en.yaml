@@ -1,0 +1,99 @@
+nav:
+    brand: GamePoint
+    games: Games
+    technical: Technical
+    language: Language
+    technical_records: Technical records
+    locale_tr: Türkçe
+    locale_en: English
+    auth_aria_label: Authentication
+    logout: Log out
+    login: Log in
+    register: Register
+app:
+    default_title: GamePoint
+home:
+    page_title: Games
+    category_label: Category
+    category_filter_aria: Filter by category
+    category_all: All
+    games_heading: Games
+    games_filtered: (filtered)
+    games_empty: No games match these criteria.
+    image_none: No image
+    pagination_aria: Pagination
+    pagination_previous: Previous
+    pagination_next: Next
+    pagination_status: 'Page %page% / %totalPages% (%total% records)'
+    load_time: 'Load time: %ms% ms'
+    load_time_cached: 'Load time: %ms% ms (Redis cache)'
+tech:
+    empty_list: No technical entries yet.
+    col_title: Title
+    col_description: Description
+    col_created: Created
+    col_actions: Actions
+    btn_create: Add record
+    btn_edit: Edit
+    btn_delete: Delete
+    delete_swal_title: Delete this record?
+    delete_swal_text: This action cannot be undone.
+    delete_swal_confirm: Yes, delete
+    delete_swal_cancel: Cancel
+    create:
+        page_title: New technical record
+        heading: New technical record
+        back_to_list: Back to list
+    edit:
+        page_title: Edit technical record
+        heading: Edit technical record
+    form:
+        title: Title
+        description: Description
+        code: Code
+        submit: Save
+        update: Update
+        cancel: Cancel
+    flash:
+        created: Technical record saved.
+        updated: Technical record updated.
+        deleted: Technical record deleted.
+        delete_csrf: Invalid security token. Please try again.
+auth:
+    login:
+        page_title: Sign in
+        heading: Sign in
+        error_invalid: Invalid username or password.
+        alert_close: Close
+        username: Username
+        password: Password
+        remember_me: Remember me
+        submit: Sign in
+        prompt_no_account: Don't have an account?
+    register:
+        page_title: Register
+        heading: Create account
+        username: Username
+        email: Email
+        password: Password
+        password_repeat: Password (again)
+        submit: Create account
+        prompt_has_account: Already have an account?
+api:
+    page_title: API
+    heading: API
+    intro: This page is placeholder content for the API controller.
+elastic:
+    page_title: Elasticsearch
+    heading: Game search (Elasticsearch)
+    cluster_version: 'ES %version%'
+    search_label: Search
+    search_placeholder: Game title or description...
+    search_submit: Search
+    reindex_btn: Index games
+    test_api: Connection test (JSON)
+    reindex_done: '%count% games indexed in Elasticsearch.'
+    results_heading: '%count% results for "%query%"'
+    results_empty: No results found. Click "Index games" first.
+    score: 'Score %score%'
+    intro: Enter a keyword to search. Index games first on initial use.

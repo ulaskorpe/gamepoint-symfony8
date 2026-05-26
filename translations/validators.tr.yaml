@@ -1,0 +1,4 @@
+tech.validation.title_not_blank: Lütfen bir başlık girin.
+tech.validation.title_max: Başlık en fazla {{ limit }} karakter olabilir.
+tech.validation.description_max: Açıklama en fazla {{ limit }} karakter olabilir.
+tech.validation.code_max: Kod alanı en fazla {{ limit }} karakter olabilir.

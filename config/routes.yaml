@@ -1,11 +1,85 @@
 # yaml-language-server: $schema=../vendor/symfony/routing/Loader/schema/routing.schema.json
 
-# This file is the entry point to configure the routes of your app.
-# Methods with the #[Route] attribute are automatically imported.
-# See also https://symfony.com/doc/current/routing.html
+# Varsayılan dil ile kök URL yönlendirmesi
+app_root_redirect:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: /en/
+        permanent: false
 
-# To list all registered routes, run the following command:
-#   bin/console debug:router
+# Locale öneki olmadan gelen eski URL'ler -> /en/...
+app_legacy_tech:
+    path: /tech
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: /en/tech
+        permanent: false
 
-controllers:
-    resource: routing.controllers
+app_legacy_tech_create:
+    path: /tech/create
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: /en/tech/create
+        permanent: false
+
+app_legacy_game:
+    path: /game
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: /en/game
+        permanent: false
+
+app_legacy_category:
+    path: /category
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: /en/category
+        permanent: false
+
+app_legacy_login:
+    path: /login
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: /en/login
+        permanent: false
+
+app_legacy_register:
+    path: /register
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: /en/register
+        permanent: false
+
+app_legacy_logout:
+    path: /logout
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: /en/logout
+        permanent: false
+
+app_legacy_test_es:
+    path: /test-es
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: /en/test-es
+        permanent: false
+
+# Arayüz controller'ları: URL öneki /{locale}/...
+web:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+        exclude:
+            - '../src/Controller/APIController.php'
+    type: attribute
+    prefix: '/{_locale}'
+    requirements:
+        _locale: en|tr
+    defaults:
+        _locale: en
+
+# API: locale öneki yok
+api:
+    resource: ../src/Controller/APIController.php
+    type: attribute
